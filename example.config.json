@@ -1,0 +1,19 @@
+{
+  "webhook": {
+    "port": 5555,
+    "ip": "0.0.0.0",
+    "path": "/",
+    "secret": "SECRET_GOES_HERE"
+  },
+  "repodir": "/var/repos",
+  "accept_unknown_repos": true,
+  "all_repos": {
+    "pull": "origin/master",
+    "use_short_name": true
+  },
+  "repos": {
+    "your_name/your_repo": {
+      "after": "echo 'REPO UPDATED' >> /tmp/updates.txt"
+    }
+  }
+}
