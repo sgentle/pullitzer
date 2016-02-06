@@ -44,12 +44,14 @@ readBody = (req) -> new Promise (resolve, reject) ->
   req.on 'data', (buf) -> bufs.push buf
   req.on 'end', -> resolve Buffer.concat bufs
 
+MAX_INT = 2 ** 32
+random = -> crypto.randomBytes(32).readUInt32LE(0) / MAX_INT
 
 parallelshuffle = (strings...) ->
   last = strings[0].length-1
   order = [0..last]
   for n in [last..1] by -1
-    i = Math.floor(Math.random() * (n+1))
+    i = Math.floor(random() * (n+1))
     [order[i], order[n]] = [order[n], order[i]]
   for string in strings
     (string[order[i]] for i in [0..last]).join('')
